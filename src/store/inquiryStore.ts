@@ -59,7 +59,7 @@ export const useInquiryStore = create<InquiryState>((set, get) => ({
       set({ error: "Failed to create inquiry", loading: false });
       console.error(error);
     }
-  }
+  },
   
 
   updateInquiryStatus: async (inquiryId: string, status: InquiryStatus) => {
