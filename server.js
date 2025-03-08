@@ -6,7 +6,7 @@ import { Server } from "socket.io";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Create WebSocket server
+//  Create WebSocket server
 const server = createServer(app);
 const io = new Server(server, {
   cors: { origin: "*" } // Allow frontend connections
@@ -17,7 +17,7 @@ app.use(express.json());
 
 let inquiries = [];
 
-// ✅ Handle API for inquiries
+//  Handle API for inquiries
 app.get("/api/inquiries", (req, res) => {
   res.json(inquiries);
 });
@@ -40,12 +40,12 @@ app.post("/api/inquiries", (req, res) => {
   };
 
   inquiries.push(newInquiry);
-  io.emit("inquiryUpdated", newInquiry); // ✅ Send real-time update
+  io.emit("inquiryUpdated", newInquiry); //  Send real-time update
 
   res.status(201).json(newInquiry);
 });
 
-// ✅ Handle status updates
+//  Handle status updates
 app.put("/api/inquiries/:id/status", (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
@@ -57,17 +57,17 @@ app.put("/api/inquiries/:id/status", (req, res) => {
 
   inquiry.status = status;
   inquiry.updatedAt = new Date().toISOString();
-  io.emit("statusUpdated", { inquiryId: id, status }); // ✅ Send real-time status update
+  io.emit("statusUpdated", { inquiryId: id, status }); //  Send real-time status update
 
   res.json(inquiry);
 });
 
-// ✅ WebSocket connection handling
+//  WebSocket connection handling
 io.on("connection", (socket) => {
   console.log("🔗 A user connected");
 
   socket.on("disconnect", () => {
-    console.log("❌ A user disconnected");
+    console.log(" A user disconnected");
   });
 
   socket.on("newInquiry", (inquiry) => {
@@ -76,7 +76,7 @@ io.on("connection", (socket) => {
   });
 });
 
-// ✅ Start the backend server
+// Start the backend server
 server.listen(PORT, () => {
-  console.log(`✅ Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

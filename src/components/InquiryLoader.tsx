@@ -5,10 +5,10 @@ const InquiryLoader = () => {
   const { fetchInquiries } = useInquiryStore();
 
   useEffect(() => {
-    fetchInquiries(); // ✅ Fetch inquiries when the component mounts
+    fetchInquiries(); 
   }, []);
 
-  return null; // This component does not render anything
+  return null; 
 };
 
 export default InquiryLoader;
